@@ -7,7 +7,6 @@ import java.util.List;
 public class MessageServiceImpl implements MessageService{
     static MessageService messageService;
     List<Message> messageList;
-
     @Override
     public boolean create(Message message) {
         return false;
@@ -16,8 +15,8 @@ public class MessageServiceImpl implements MessageService{
     @Override
     public boolean add(Message message) {
         if (message!=null){
-            messageList.add(message);
-            return true;
+            boolean add = messageList.add(message);
+            return add;
         }
         return false;
     }
@@ -37,7 +36,7 @@ public class MessageServiceImpl implements MessageService{
         return null;
     }
     public static MessageService getInstance(){
-        if (messageService==null){
+        if (messageService!=null){
             messageService = new MessageServiceImpl();
         }
         return messageService;

@@ -65,10 +65,12 @@ public class UserServiceImpl implements UserService{
     public static User getUser(Integer choose){
         int i = 1;
         for (User user : userService.get()) {
-            if(!Objects.equals(user.getId(), LogIn.getIdLogIn())&&choose==i){
-                return user;
+            if(!Objects.equals(user.getId(), LogIn.getIdLogIn())){
+                if (choose==i){
+                    return user;
+                }
+                i++;
             }
-            i++;
         }
         return null;
     }

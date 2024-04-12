@@ -22,7 +22,7 @@ public class FrontEnd {
     private static MessageService messageService = MessageServiceImpl.getInstance();
 
     public static void main(String[] args) {
-        System.out.println("Welcom in Telegram");
+        System.out.println("Welcome in Telegram");
         while (true){
             Integer menuLogIn = menuLogIn();
             switch (menuLogIn){
@@ -98,20 +98,20 @@ public class FrontEnd {
     }
 
     private static void chats() {
-        viewContact();
-        Integer choose = Scan.scanInt("Choose");
-        User user = UserServiceImpl.getUser(choose);
-        if (user!=null){
-            for (Chat chat : chatService.get()) {
-                if (Objects.equals(chat.getUserId2(),user.getId())){
-                    for (Message message : messageService.get()) {
-                        if (Objects.equals(chat.getId(),message.getChatId())){
-                            System.out.println(message);
-                        }
-                    }
-                }
-            }
-        }
+//        viewContact();
+//        Integer choose = Scan.scanInt("Choose");
+//        User user = UserServiceImpl.getUser(choose);
+//        if (user!=null){
+//            for (Chat chat : chatService.get()) {
+//                if (Objects.equals(chat.getUserId2(),user.getId())){
+//                    for (Message message : messageService.get()) {
+//                        if (Objects.equals(chat.getId(),message.getChatId())){
+//                            System.out.println(message);
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
     private static void openGroup() {
@@ -124,9 +124,10 @@ public class FrontEnd {
         User user = UserServiceImpl.getUser(choose);
         String text = Scan.scanStr("Enter Text");
         Message message = new Message(text,LogIn.getIdLogIn(),TypeMessage.CHAT_MESSAGE);
-        messageService.add(message);
+
         assert user != null;
         chatService.add(new Chat(message, message, user, message.getType()));
+
     }
 
     private static void viewContact() {

@@ -8,5 +8,5 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ChatService extends BaseService<Chat>{
-    void getList(TypeMessage type);
+    List<Chat> getList(TypeMessage type);
 }

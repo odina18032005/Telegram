@@ -23,8 +23,8 @@ public class ChatServiceImpl implements ChatService{
     @Override
     public boolean add(Chat chat) {
         if (chat!=null){
-            chatList.add(chat);
-            return true;
+
+            return  chatList.add(chat);
         }
         return false;
     }
@@ -49,8 +49,11 @@ public class ChatServiceImpl implements ChatService{
     }
 
     @Override
-    public void getList(TypeMessage type) {
-
+    public List<Chat> getList(TypeMessage type) {
+        if (chatList!= null) {
+            return chatList;
+        }
+        return null;
     }
     public static ChatService getInstance(){
         if (chatService==null){
