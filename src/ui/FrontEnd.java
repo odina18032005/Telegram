@@ -9,6 +9,7 @@ import backend.model.User;
 import backend.registratdiya.LogIn;
 import backend.service.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public class FrontEnd {
     private static UserService userService = UserServiceImpl.getInstance();
     private static ChatService chatService = ChatServiceImpl.getInstance();
     private static GroupService groupService = GroupServiceImpl.getInstance();
+    private static MessageService messageService = MessageServiceImpl.getInstance();
 
     public static void main(String[] args) {
         System.out.println("Welcom in Telegram");
@@ -58,8 +60,8 @@ public class FrontEnd {
                     2. View Contact
                     3. Open Chat
                     4. Open Group
-                    5. View Chats
-                    6. View Groups
+                    5. Chats
+                    6. Groups
                     7. Delete Chat
                     8. Delete Group
                     0. Exit
@@ -97,6 +99,19 @@ public class FrontEnd {
 
     private static void chats() {
         viewContact();
+        Integer choose = Scan.scanInt("Choose");
+        User user = UserServiceImpl.getUser(choose);
+        if (user!=null){
+            for (Chat chat : chatService.get()) {
+                if (Objects.equals(chat.getUserId2(),user.getId())){
+                    for (Message message : messageService.get()) {
+                        if (Objects.equals(chat.getId(),message.getChatId())){
+                            System.out.println(message);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private static void openGroup() {
@@ -106,17 +121,12 @@ public class FrontEnd {
     private static void openChat() {
         viewContact();
         Integer choose = Scan.scanInt("Choose");
-        int i = 1;
-        String id = "";
-        for (User user : userService.get()) {
-            if(!Objects.equals(user.getId(),LogIn.getIdLogIn())&&choose==i){
-                id = user.getId();
-            }
-            i++;
-        }
-        String text = Scan.scanStr("Enter Text: ");
+        User user = UserServiceImpl.getUser(choose);
+        String text = Scan.scanStr("Enter Text");
         Message message = new Message(text,LogIn.getIdLogIn(),TypeMessage.CHAT_MESSAGE);
-        chatService.add(new Chat(message, message, id, message.getType()));
+        messageService.add(message);
+        assert user != null;
+        chatService.add(new Chat(message, message, user, message.getType()));
     }
 
     private static void viewContact() {
