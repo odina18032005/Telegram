@@ -55,7 +55,7 @@ public class Message {
 
     @Override
     public String toString() {
-        if (!Objects.equals(user.getId(),userId)){
+        if (Objects.equals(user.getId(),userId)){
             return  "                          " + time + "\n" + "Me: " + text;
         }
         return  "                          " + time + "\n" + user.getName() + ": " + text;
