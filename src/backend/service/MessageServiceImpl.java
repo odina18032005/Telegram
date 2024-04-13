@@ -4,6 +4,7 @@ import backend.model.Message;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MessageServiceImpl implements MessageService{
     static MessageService messageService;
@@ -25,7 +26,11 @@ public class MessageServiceImpl implements MessageService{
 
     @Override
     public void delete(String id) {
-
+        for (int i = 0; i < messageList.size(); i++) {
+            if (messageList.get(i)!=null && messageList.get(i).getId().equals(id)){
+                messageList.set(i,null);
+            }
+        }
     }
 
     @Override
