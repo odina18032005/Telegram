@@ -3,7 +3,9 @@ package backend.service;
 import backend.enums.TypeMessage;
 import backend.model.Chat;
 import backend.model.Group;
+import backend.model.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +23,8 @@ public class ChatServiceImpl implements ChatService{
     @Override
     public boolean add(Chat chat) {
         if (chat!=null){
-            return true;
+
+            return  chatList.add(chat);
         }
         return false;
     }
@@ -46,8 +49,11 @@ public class ChatServiceImpl implements ChatService{
     }
 
     @Override
-    public void getList(TypeMessage type) {
-
+    public List<Chat> getList(TypeMessage type) {
+        if (chatList!= null) {
+            return chatList;
+        }
+        return null;
     }
     public static ChatService getInstance(){
         if (chatService==null){

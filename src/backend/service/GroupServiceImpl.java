@@ -19,6 +19,10 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public boolean add(Group group) {
+        if (group!=null){
+            groupList.add(group);
+            return true;
+        }
         return false;
     }
 

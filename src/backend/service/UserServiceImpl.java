@@ -3,6 +3,7 @@ package backend.service;
 import backend.dto.LoginDTO;
 import backend.model.Group;
 import backend.model.User;
+import backend.registratdiya.LogIn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,18 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> get() {
         return userList;
+    }
+    public static User getUser(Integer choose){
+        int i = 1;
+        for (User user : userService.get()) {
+            if(!Objects.equals(user.getId(), LogIn.getIdLogIn())){
+                if (choose==i){
+                    return user;
+                }
+                i++;
+            }
+        }
+        return null;
     }
 
     public static UserService getInstance(){
