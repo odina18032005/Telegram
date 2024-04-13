@@ -90,7 +90,12 @@ public class FrontEnd {
     }
 
     private static void deleteChat() {
-
+        viewContact();
+        Integer choose = Scan.scanInt("Choose");
+        User user = UserServiceImpl.getUser(choose);
+        if (user != null) {
+            chatService.delete(user.getId());
+        }
     }
 
     private static void groups() {
@@ -103,18 +108,18 @@ public class FrontEnd {
         User user = UserServiceImpl.getUser(choose);
         if (user!=null){
             for (Chat chat : chatService.get()) {
-                if (Objects.equals(chat.getUserId2(),user.getId())){
+//                if (Objects.equals(chat.getUserId2(),user.getId())){
                     for (Message message : messageService.get()) {
                         if (Objects.equals(chat.getId(),message.getChatId())){
                             System.out.println(message);
-                            String text = Scan.scanStr("Enter Text");
-                            message = new Message(text,LogIn.getIdLogIn(),TypeMessage.CHAT_MESSAGE,user);
-                            messageService.add(message);
-                            chatService.add(new Chat(message, message, user, message.getType()));
                         }
                     }
-                }
+//                }
             }
+            String text = Scan.scanStr("Enter Text");
+            Message newMessage = new Message(text,LogIn.getIdLogIn(),TypeMessage.CHAT_MESSAGE,user);
+            messageService.add(newMessage);
+            chatService.add(new Chat(newMessage,user));
         }
     }
 
@@ -130,7 +135,7 @@ public class FrontEnd {
         Message message = new Message(text,LogIn.getIdLogIn(),TypeMessage.CHAT_MESSAGE,user);
         messageService.add(message);
         assert user != null;
-        chatService.add(new Chat(message, message, user, message.getType()));
+        chatService.add(new Chat(message, user));
 
     }
 

@@ -13,11 +13,11 @@ public class Chat {
     private TypeMessage type;
     static List<Message> messageList;
 
-    public Chat(Message id, Message userId1, User userId2, TypeMessage type) {
-        this.id = id.getChatId();
-        this.userId1 = userId1.getUserId();
+    public Chat(Message message, User userId2) {
+        this.id = message.getChatId();
+        this.userId1 = message.getUserId();
         this.userId2 = userId2.getId();
-        this.type = type;
+        this.type = message.getType();
     }
 
     public String getId() {
