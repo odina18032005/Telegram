@@ -1,6 +1,8 @@
 package backend.model;
 
 import backend.enums.TypeMessage;
+import backend.service.UserService;
+import backend.service.UserServiceImpl;
 
 import java.time.LocalTime;
 import java.util.Objects;
@@ -55,9 +57,12 @@ public class Message {
 
     @Override
     public String toString() {
-        if (Objects.equals(user.getId(),userId)){
-            return  "                          " + time + "\n" + "Me: " + text;
+        UserService userService = UserServiceImpl.getInstance();
+        for (User user1 : userService.get()) {
+            if (!Objects.equals(user1.getId(),user.getId())){
+                return  "                          " + time + "\n" + user1.getName() + ": " + text;
+            }
         }
-        return  "                          " + time + "\n" + user.getName() + ": " + text;
+        return  "                          " + time + "\n" + user.getName() + text;
     }
 }

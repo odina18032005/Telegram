@@ -95,6 +95,15 @@ public class FrontEnd {
         User user = UserServiceImpl.getUser(choose);
         if (user != null) {
             chatService.delete(user.getId());
+            for (Chat chat : chatService.get()) {
+                for (Message message : messageService.get()) {
+                    if (Objects.equals(chat.getUserId2(),user.getId())&&
+                            Objects.equals(chat.getId(),message.getChatId())
+                    ){
+                        messageService.delete(message.getId());
+                    }
+                }
+            }
         }
     }
 
@@ -108,13 +117,11 @@ public class FrontEnd {
         User user = UserServiceImpl.getUser(choose);
         if (user!=null){
             for (Chat chat : chatService.get()) {
-//                if (Objects.equals(chat.getUserId2(),user.getId())){
-                    for (Message message : messageService.get()) {
-                        if (Objects.equals(chat.getId(),message.getChatId())){
-                            System.out.println(message);
-                        }
+                for (Message message : messageService.get()) {
+                    if (Objects.equals(chat.getId(),message.getChatId())){
+                        System.out.println(message);
                     }
-//                }
+                }
             }
             String text = Scan.scanStr("Enter Text");
             Message newMessage = new Message(text,LogIn.getIdLogIn(),TypeMessage.CHAT_MESSAGE,user);
