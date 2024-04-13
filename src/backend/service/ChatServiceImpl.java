@@ -12,6 +12,11 @@ import java.util.Objects;
 public class ChatServiceImpl implements ChatService{
     static ChatService chatService;
     List<Chat> chatList;
+
+    private ChatServiceImpl() {
+        this.chatList = new ArrayList<>();
+    }
+
     @Override
     public boolean create(Chat chat) {
         if (chat!=null){
@@ -22,11 +27,7 @@ public class ChatServiceImpl implements ChatService{
 
     @Override
     public boolean add(Chat chat) {
-        if (chat!=null){
-
-            return  chatList.add(chat);
-        }
-        return false;
+        return this.chatList.add(chat);
     }
 
     @Override

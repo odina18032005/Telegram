@@ -3,12 +3,18 @@ package backend.service;
 import backend.enums.TypeMessage;
 import backend.model.Group;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class GroupServiceImpl implements GroupService {
     static GroupService groupService;
     List<Group> groupList;
+
+    private GroupServiceImpl() {
+        this.groupList = new ArrayList<>();
+    }
+
     @Override
     public boolean create(Group group) {
         if (group!=null){
@@ -19,11 +25,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public boolean add(Group group) {
-        if (group!=null){
-            groupList.add(group);
-            return true;
-        }
-        return false;
+        return this.groupList.add(group);
     }
 
     @Override
