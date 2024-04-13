@@ -32,7 +32,11 @@ public class ChatServiceImpl implements ChatService{
 
     @Override
     public void delete(String id) {
-        chatList.removeIf(chat -> Objects.equals(chat.getId(), id));
+        for (int i = 0; i < chatList.size(); i++) {
+            if (chatList.get(i)!=null && chatList.get(i).getId().equals(id)){
+                chatList.set(i,null);
+            }
+        }
     }
 
     @Override

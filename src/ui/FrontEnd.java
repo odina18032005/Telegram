@@ -96,11 +96,18 @@ public class FrontEnd {
         if (user != null) {
             chatService.delete(user.getId());
             for (Chat chat : chatService.get()) {
-                for (Message message : messageService.get()) {
-                    if (Objects.equals(chat.getUserId2(),user.getId())&&
-                            Objects.equals(chat.getId(),message.getChatId())
-                    ){
-                        messageService.delete(message.getId());
+                if(chat!=null){
+                    for (Message message : messageService.get()) {
+                        if (message!=null){
+                            if (Objects.equals(chat.getUserId2(),user.getId())&&
+                                    Objects.equals(chat.getId(),message.getChatId())
+                            ){
+                                messageService.delete(message.getId());
+                            }
+                        }
+                        else{
+                            System.out.println("No messsages yet!!!");
+                        }
                     }
                 }
             }
@@ -117,9 +124,15 @@ public class FrontEnd {
         User user = UserServiceImpl.getUser(choose);
         if (user!=null){
             for (Chat chat : chatService.get()) {
-                for (Message message : messageService.get()) {
-                    if (Objects.equals(chat.getId(),message.getChatId())){
-                        System.out.println(message);
+                if (chat!=null){
+                    for (Message message : messageService.get()) {
+                        if (message!=null){
+                            if (Objects.equals(chat.getId(),message.getChatId())){
+                                System.out.println(message);
+                            }
+                        }else{
+                            System.out.println("No messsages yet!!!");
+                        }
                     }
                 }
             }
