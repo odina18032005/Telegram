@@ -150,12 +150,17 @@ public class FrontEnd {
         viewContact();
         Integer choose = Scan.scanInt("Choose");
         User user = UserServiceImpl.getUser(choose);
+        for (Chat chat : chatService.get()) {
+            if (chat!=null && (Objects.equals(user.getId(),chat.getUserId2())||Objects.equals(user.getId(),chat.getUserId1()))){
+                System.out.println("There is already a chat with this user!!!");
+                return;
+            }
+        }
         String text = Scan.scanStr("Enter Text");
         Message message = new Message(text,LogIn.getIdLogIn(),TypeMessage.CHAT_MESSAGE,user);
         messageService.add(message);
         assert user != null;
         chatService.add(new Chat(message, user));
-
     }
 
     private static void viewContact() {
