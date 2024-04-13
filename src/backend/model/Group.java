@@ -2,17 +2,19 @@ package backend.model;
 
 import backend.enums.TypeMessage;
 
+import java.util.List;
+
 public class Group {
     private String name;
     private String id;
     private String userId;
     private TypeMessage type;
 
-    public Group(String name, Message id, Message userId, TypeMessage type) {
+    public Group(String name, Message message) {
         this.name = name;
-        this.id = id.getChatId();
-        this.userId = userId.getUserId();
-        this.type = type;
+        this.id = message.getChatId();
+        this.userId = message.getUserId();
+        this.type = message.getType();
     }
 
     public String getId() {

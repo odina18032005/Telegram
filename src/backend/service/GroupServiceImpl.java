@@ -30,11 +30,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public void delete(String id) {
-        for (Group group : groupList) {
-            if (Objects.equals(group.getId(),id)){
-                groupList.remove(group);
-            }
-        }
+
     }
 
     @Override
