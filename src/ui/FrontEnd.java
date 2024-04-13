@@ -144,7 +144,6 @@ public class FrontEnd {
     }
 
     private static void openGroup() {
-
     }
 
     private static void openChat() {
