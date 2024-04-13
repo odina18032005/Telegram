@@ -3,6 +3,7 @@ package backend.model;
 import backend.enums.TypeMessage;
 
 import java.time.LocalTime;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Message {
@@ -14,13 +15,14 @@ public class Message {
     private TypeMessage type;
     private LocalTime time;
 
-    public Message(String text, String userId, TypeMessage type) {
+    public Message(String text, String userId, TypeMessage type, User user) {
         this.text = text;
         this.chatId = UUID.randomUUID().toString();
         this.userId = userId;
         this.type = type;
         this.id = UUID.randomUUID().toString();
         this.time = LocalTime.now();
+        this.user = user;
     }
 
     public String getText() {
@@ -53,6 +55,9 @@ public class Message {
 
     @Override
     public String toString() {
+        if (!Objects.equals(user.getId(),userId)){
+            return  "                          " + time + "\n" + "Me: " + text;
+        }
         return  "                          " + time + "\n" + user.getName() + ": " + text;
     }
 }
