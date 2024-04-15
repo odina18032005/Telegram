@@ -23,7 +23,6 @@ public class LogIn {
                 idLogIn = user.getId();
             }
         }
-
         return login;
     }
     public static User signUp(){
