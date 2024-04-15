@@ -40,7 +40,7 @@ public class ChatServiceImpl implements ChatService{
     }
 
     @Override
-    public void update(Chat newM) {
+    public void update(Chat newM, int index) {
 
     }
 

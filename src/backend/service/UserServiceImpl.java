@@ -54,8 +54,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void update(User newM) {
-
+    public void update(User newM, int index) {
+        userList.set(index,newM);
     }
 
     @Override

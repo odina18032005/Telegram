@@ -7,6 +7,6 @@ public interface BaseService<M> {
     boolean create(M m);
     boolean add(M m);
     void delete(String id);
-    void update(M newM);
+    void update(M newM, int index);
     List<M> get();
 }

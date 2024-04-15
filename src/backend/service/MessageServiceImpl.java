@@ -34,9 +34,10 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public void update(Message newM) {
+    public void update(Message newM, int index) {
 
     }
+
 
     @Override
     public List<Message> get() {

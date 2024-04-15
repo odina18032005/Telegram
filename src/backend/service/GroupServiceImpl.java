@@ -5,7 +5,6 @@ import backend.model.Group;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class GroupServiceImpl implements GroupService {
     static GroupService groupService;
@@ -34,13 +33,18 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void update(Group newM) {
+    public void update(Group newM, int index) {
 
     }
 
     @Override
     public List<Group> get() {
         return groupList;
+    }
+
+    @Override
+    public void update(Group newM) {
+
     }
 
     @Override
