@@ -76,7 +76,14 @@ public class UserServiceImpl implements UserService{
         }
         return null;
     }
-
+    public static User getUser(String userId){
+        for (User user : userService.get()) {
+            if(Objects.equals(user.getId(), userId)){
+                return user;
+            }
+        }
+        return null;
+    }
     public static UserService getInstance(){
         if (userService==null){
             userService = new UserServiceImpl();

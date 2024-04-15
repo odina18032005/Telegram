@@ -61,7 +61,7 @@ public class Message {
     public String toString() {
         UserService userService = UserServiceImpl.getInstance();
         for (User user1 : userService.get()) {
-            if (!Objects.equals(user1.getId(),user)){
+            if (Objects.equals(user1.getId(),userId)){
                 return  "                          " + time + "\n" + user1.getName() + ": " + text;
             }
         }

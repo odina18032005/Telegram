@@ -57,10 +57,12 @@ public class MenuProfile {
     }
 
     private static void menu() {
+        System.out.println("=========================================");
         System.out.println("""
                 1. Edit profile
                 2. Show Profile
                 0. Exit
                 """);
+        System.out.println("=========================================");
     }
 }

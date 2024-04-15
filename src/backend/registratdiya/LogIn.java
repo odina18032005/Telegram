@@ -48,14 +48,15 @@ public class LogIn {
     }
 
     public static Integer menuLogIn(){
+        System.out.println("=========================================");
         System.out.println("""
                        Menu:
                        1. LogIn
                        2. SignUp
                        0. Exit
                        """);
+        System.out.println("=========================================");
         return Scan.scanInt("Choose");
-
     }
 
 }
