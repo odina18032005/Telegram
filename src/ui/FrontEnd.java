@@ -64,6 +64,7 @@ public class FrontEnd {
                     6. Groups
                     7. Delete Chat
                     8. Delete Group
+                    9. Search
                     0. Exit
                     """);
             Integer choose = Scan.scanInt("Choose");
@@ -76,11 +77,21 @@ public class FrontEnd {
                 case 6-> groups();
                 case 7-> deleteChat();
                 case 8-> deleteGroup();
+                case 9-> search();
                 case 0->{
                     System.out.println("Bye Bye");
                     return;
                 }
                 default -> System.out.println("Error!!!");
+            }
+        }
+    }
+
+    private static void search() {
+        String search = Scan.scanStr("Search");
+        for (User user : userService.get()) {
+            if (Objects.equals(user.getName(),search)||Objects.equals(user.getUsername(),search)||Objects.equals(user.getPhoneNumber(),search)){
+                System.out.println(user);
             }
         }
     }
@@ -175,10 +186,6 @@ public class FrontEnd {
     }
 
     private static void editProfile() {
-        String name = Scan.scanStr("Enter Name");
-        String username = Scan.scanStr("Enter Username");
-        Integer phoneNumber = Scan.scanInt("Enter PhoneNumber");
-        String password = Scan.scanStr("Enter Password");
-        userService.update(new User(name, username, phoneNumber, password));
+        MenuProfile.profile();
     }
 }

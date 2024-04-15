@@ -42,6 +42,11 @@ public class LogIn {
     public static String getIdLogIn(){
         return idLogIn;
     }
+
+    public static void setIdLogIn(String idLogIn) {
+        LogIn.idLogIn = idLogIn;
+    }
+
     public static Integer menuLogIn(){
         System.out.println("""
                        Menu:

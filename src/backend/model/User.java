@@ -58,6 +58,6 @@ public class User {
 
     @Override
     public String toString() {
-        return name + '\'' + "@" + username + '\'' + "+998 " + phoneNumber;
+        return "Your name: " + name + '\n' + "@" + username + '\n' + "+998 " + phoneNumber;
     }
 }
