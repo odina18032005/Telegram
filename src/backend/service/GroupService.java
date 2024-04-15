@@ -9,4 +9,5 @@ public interface GroupService extends BaseService<Group> {
     void update(Group newM);
 
     void getList(TypeMessage type);
+    Group getGroup(Integer choose);
 }

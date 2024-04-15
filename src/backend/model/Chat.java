@@ -11,7 +11,7 @@ public class Chat {
     private String userId1;
     private String userId2;
     private TypeMessage type;
-    static List<Message> messageList;
+    public static List<Message> messageList;
 
     public Chat(Message message, User userId2) {
         this.id = message.getChatId();

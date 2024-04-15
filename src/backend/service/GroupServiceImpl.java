@@ -2,13 +2,14 @@ package backend.service;
 
 import backend.enums.TypeMessage;
 import backend.model.Group;
+import backend.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GroupServiceImpl implements GroupService {
     static GroupService groupService;
-    List<Group> groupList;
+   static List<Group> groupList;
 
     private GroupServiceImpl() {
         this.groupList = new ArrayList<>();
@@ -29,7 +30,11 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public void delete(String id) {
-
+        for (int i = 0; i < groupList.size(); i++) {
+            if (groupList.get(i)!=null && groupList.get(i).getId().equals(id)){
+                groupList.set(i,null);
+            }
+        }
     }
 
     @Override
@@ -55,6 +60,19 @@ public class GroupServiceImpl implements GroupService {
             i++;
         }
     }
+
+    @Override
+    public Group getGroup(Integer choose) {
+        int i = 0;
+        for (Group group : groupList) {
+            if (i==choose){
+                return group;
+            }
+            i++;
+        }
+        return null;
+    }
+
     public static GroupService getInstance(){
         if (groupService==null){
             groupService = new GroupServiceImpl();

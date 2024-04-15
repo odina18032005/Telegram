@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Message {
-    private User user;
+    private String user;
     private String text;
     private String chatId;
     private String userId;
@@ -17,15 +17,17 @@ public class Message {
     private TypeMessage type;
     private LocalTime time;
 
-    public Message(String text, String userId, TypeMessage type, User user) {
+    public Message(String text, String userId, TypeMessage type, String user, String chatId) {
         this.text = text;
-        this.chatId = UUID.randomUUID().toString();
+        this.chatId = chatId;
         this.userId = userId;
         this.type = type;
         this.id = UUID.randomUUID().toString();
         this.time = LocalTime.now();
         this.user = user;
     }
+
+
 
     public String getText() {
         return text;
@@ -59,10 +61,11 @@ public class Message {
     public String toString() {
         UserService userService = UserServiceImpl.getInstance();
         for (User user1 : userService.get()) {
-            if (!Objects.equals(user1.getId(),user.getId())){
+            if (!Objects.equals(user1.getId(),user)){
                 return  "                          " + time + "\n" + user1.getName() + ": " + text;
             }
         }
-        return  "                          " + time + "\n" + user.getName() + text;
+        return null;
     }
 }
+

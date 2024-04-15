@@ -2,12 +2,11 @@ package backend.model;
 
 import backend.enums.TypeMessage;
 
-import java.util.List;
-
 public class Group {
     private String name;
     private String id;
     private String userId;
+
     private TypeMessage type;
 
     public Group(String name, Message message) {

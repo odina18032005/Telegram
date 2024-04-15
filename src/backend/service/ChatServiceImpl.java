@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static backend.model.Chat.messageList;
+
 public class ChatServiceImpl implements ChatService{
     static ChatService chatService;
     List<Chat> chatList;

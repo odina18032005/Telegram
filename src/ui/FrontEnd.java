@@ -12,6 +12,7 @@ import backend.service.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import static backend.registratdiya.LogIn.menuLogIn;
 
@@ -127,19 +128,51 @@ public class FrontEnd {
 
     private static void groups() {
 
+        int i = 1;
+        for (Group group : groupService.get()) {
+            if (group!=null ){
+                System.out.println(i + ". " + group.getName());
+                i++;
+            }
+        }
+        Integer choose = Scan.scanInt("Choose") - 1;
+        Group group = groupService.getGroup(choose);
+        String groupId = "";
+        String userId = "";
+        String name = "";
+        if (group != null) {
+            System.out.println("                          " + group.getName());
+            for (Group group1 : groupService.get()) {
+                for (Message message : messageService.get()) {
+                    if (Objects.equals(group1.getId(), message.getChatId())) {
+                        System.out.println(message);
+                        groupId = group.getId();
+                        userId = group.getUserId();
+                        name = group.getName();
+                    }
+                }
+            }
+        }
+        String text = Scan.scanStr("Enter Text");
+        Message newMessage = new Message(text,LogIn.getIdLogIn(),TypeMessage.GROUP_MESSAGE, userId, groupId);
+        messageService.add(newMessage);
     }
 
     private static void chats() {
         viewContact();
         Integer choose = Scan.scanInt("Choose");
         User user = UserServiceImpl.getUser(choose);
+        String chatId = "";
         if (user!=null){
             for (Chat chat : chatService.get()) {
                 if (chat!=null){
                     for (Message message : messageService.get()) {
                         if (message!=null){
-                            if (Objects.equals(chat.getId(),message.getChatId())){
+                            if (Objects.equals(chat.getId(),message.getChatId())&&
+                                    Objects.equals(chat.getUserId2(),user.getId())
+                            ){
                                 System.out.println(message);
+                                chatId = chat.getId();
                             }
                         }else{
                             System.out.println("No messsages yet!!!");
@@ -148,14 +181,40 @@ public class FrontEnd {
                 }
             }
             String text = Scan.scanStr("Enter Text");
-            Message newMessage = new Message(text,LogIn.getIdLogIn(),TypeMessage.CHAT_MESSAGE,user);
+            Message newMessage = new Message(text,LogIn.getIdLogIn(),TypeMessage.CHAT_MESSAGE, user.getId(),chatId);
             messageService.add(newMessage);
-            chatService.add(new Chat(newMessage,user));
         }
     }
 
     private static void openGroup() {
+        System.out.println("Create group:");
+        viewContact();
+     Integer member = Scan.scanInt(" Group members");
+     User user = UserServiceImpl.getUser(member);
+     String name = Scan.scanStr("Enter Group Name");
+        System.out.println("Created Group!!!");
+        String text = Scan.scanStr("Enter Text");
+        String groupId = UUID.randomUUID().toString();
+        Message message = new Message(text,LogIn.getIdLogIn(),TypeMessage.GROUP_MESSAGE, user.getId(), groupId);
+        messageService.add(message);
+        groupService.add(new Group(name,message));
     }
+    private static void showGroupMembers(List<Group> myGroups) {
+
+        System.out.println("Groups: ");
+        int i = 1;
+        for (Group group : groupService.get()) {
+            for (User user : userService.get()) {
+                if (Objects.equals(group.getUserId(), user.getId())){
+                    System.out.println(i + ". " + user.getName());
+                    i++;
+                }
+            }
+        }
+        Integer index = Scan.scanInt("Choose Group: ");
+
+    }
+
 
     private static void openChat() {
         viewContact();
@@ -167,8 +226,9 @@ public class FrontEnd {
                 return;
             }
         }
+        String chatId = UUID.randomUUID().toString();
         String text = Scan.scanStr("Enter Text");
-        Message message = new Message(text,LogIn.getIdLogIn(),TypeMessage.CHAT_MESSAGE,user);
+        Message message = new Message(text,LogIn.getIdLogIn(),TypeMessage.CHAT_MESSAGE,user.getId(), chatId);
         messageService.add(message);
         assert user != null;
         chatService.add(new Chat(message, user));
